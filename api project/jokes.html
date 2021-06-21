@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jokes</title>
+</head>
+<body>
+    <h1>Joke of the day</h1>
+    <div class="center" id="center">
+        <p>This is a joke</p>
+        
+    </div>
+    <button id="getit">click</button>
+    <script>
+        const joke=document.getElementById('center');
+        const button=document.getElementById('getit');
+        async function jokepop(){
+            const res= fetch("https://us-central1-dadsofunny.cloudfunctions.net/DadJokes",
+            headers(
+                'Accept':'';
+            ));
+        }
+        button.addEventListener('click',jokepop);
+    </script>
+</body>
+</html>

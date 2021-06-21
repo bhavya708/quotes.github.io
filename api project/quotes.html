@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="quotes.css" class="css">
+    <title>Quotes</title>
+</head>
+<body>
+    <section>
+        <div class="main">
+            <div class="container">
+                <div class="box">
+                    <!-- <div class="icon">icon</div> -->
+                    <h1 class="h1">Quotes Of the day</h1>
+                    <p class="para" id="para">Loading ...</p>
+                    <p class="author" id="author">Null</p>
+                    <div id="footer">
+
+                        <button id="nextButton">Next Quote</button>
+                        <button id="previous">Previous</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const para=document.getElementById("para");
+        const author=document.getElementById("author");
+        const button=document.getElementById("button");
+        let realData="";
+        let rdm=Math.floor(Math.random()*1643);
+        const getNewQuotes= () =>{
+            // let rdm=Math.floor(Math.random()*realData.length);
+            
+            rdm=(rdm+1)%(realData.length);
+            para.innerText=`${realData[rdm].text}`;
+            if(realData[rdm].author!==null){
+                author.innerText=`by ${realData[rdm].author}`;
+            }
+            else{
+                author.innerText=`Unknown`;
+            }
+            
+            
+        }
+        const getPrevious= () =>{
+            // rdm=(realData.length-rdm-1)%(realData.length);
+            para.innerText=`${realData[rdm].text}`;
+            console.log(realData.length)
+            if(realData[rdm].author!==null){
+                author.innerText=`by ${realData[rdm].author}`;
+            }
+            else{
+                author.innerText=`Unknown`;
+            }
+            rdm=(realData.length-rdm-1)%(realData.length);
+        }
+
+        const getQuotes = async () => {
+            const api="https://type.fit/api/quotes";
+            try{
+                let data =await fetch(api);
+                realData=await data.json();
+                getNewQuotes();
+                
+            }catch(error){
+
+            }
+        }
+
+        getQuotes();
+        nextButton.addEventListener('click',getNewQuotes);
+        previous.addEventListener('click',getPrevious);
+    </script>
+</body>
+</html>
+
